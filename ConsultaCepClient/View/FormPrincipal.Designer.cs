@@ -111,7 +111,6 @@
             this.MaximumSize = new System.Drawing.Size(400, 280);
             this.MinimumSize = new System.Drawing.Size(400, 280);
             this.Name = "FromPrincipal";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Busca Cep";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net.Http;
 using ConsultaCepClient.Controller;
 using ConsultaCepClient.Model;
+using System.Text.RegularExpressions;
 
 namespace ConsultaCepClient
 {
@@ -20,31 +21,37 @@ namespace ConsultaCepClient
             InitializeComponent();
         }
         ResultadoCepController consultaCepController = new ResultadoCepController();
-
+        
         //BOTÃO CONSULTAR CEP
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (!maskCep.MaskCompleted)//Se a máscara não for completada
             {
-                var resultadoCep = new ResultadoCep();
-                resultadoCep = consultaCepController.ConsultaCep(maskCep.Text);
-
-                if (resultadoCep.Cep != null)
-                {
-                    MessageBox.Show("Resultado:\n" + resultadoCep);
-                }
-                else
-                {
-                    MessageBox.Show("Cep não encontrado !");
-                }
-
+                MessageBox.Show("Cep inválido !");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro:\n" + ex.Message);
+                try
+                {
+                    var resultadoCep = new ResultadoCep();
+                    resultadoCep = consultaCepController.ConsultaCep(maskCep.Text);
 
+                    if (resultadoCep.Cep != null)
+                    {
+                        MessageBox.Show("Resultado:\n" + resultadoCep);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cep não encontrado !");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro:\n" + ex.Message);
+
+                }
             }
-
         }
     }
 }
